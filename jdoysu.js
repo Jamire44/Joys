@@ -1,7 +1,7 @@
 var numSelected = null;
 var tileSelected = null;
-
 var errors = 0;
+let gameWon = false;
 
 var board = [
     "2---",
@@ -21,9 +21,17 @@ window.onload = function() {
     setGame();
 }
 
+
+
+
+
+
+
+
+// Board and Digits
 function setGame(){
 
-    // Digits 1 - 9
+    // Digits 1 - 4
     for(let i = 1; i <= 4; i++){
         //<div> </div>
         let number = document.createElement("div");
@@ -34,7 +42,7 @@ function setGame(){
         document.getElementById("digits").appendChild(number);
     }
 
-    // Board 9x9
+    // Board 4x4
     for(let r = 0; r < 4; r++){
         for(let c = 0; c < 4; c++){
             let tile = document.createElement("div");
@@ -56,6 +64,13 @@ function setGame(){
     }
 }
 
+
+
+
+
+
+
+// If a number is selected
 function selectNumber(){
     if (numSelected != null){
         numSelected.classList.remove("number-selected");
@@ -64,6 +79,8 @@ function selectNumber(){
     numSelected.classList.add("number-selected");
 }
 
+
+// Logic for if tile is selected and it is empty place the number
 function selectTile(){
     if (numSelected){
         if(this.innerText != ""){
@@ -82,5 +99,55 @@ function selectTile(){
     else{
         errors += 1;
         document.getElementById("errors").innerText = errors;
+    }   
+        
+    gameIsWon();
+}
+
+function gameIsWon() {
+    let tiles = document.querySelectorAll('.tile:not(.starter-tiles)');
+    let allCorrect = true;
+
+    tiles.forEach(tile => {
+        let coords = tile.id.split("-");
+        let r = parseInt(coords[0]);
+        let c = parseInt(coords[1]);
+
+        if (tile.innerText !== solution[r][c]) {
+            allCorrect = false;
+            return;
+        }
+    });
+
+    if (allCorrect) {
+        gameWon = true;
+        displayMessageIfWon();
+    } 
+    
+
+ 
+}
+
+
+
+// If game is lost, display this message
+function displayMessageIfLost() {
+    if(errors >= 3) {
+        document.getElementById("loseMessage").style.display = 'block';
     }
+}
+
+
+
+// If game is won, display this message
+function displayMessageIfWon(){
+    var errorAmount = document.getElementById("errors").innerText;
+    document.getElementById("winMessage").innerHTML += "<h3>It only took " + errorAmount + " tries</h3>";
+    document.getElementById("winMessage").style.display = 'block';
+}
+
+
+// Game is lost, reset game and tell them they lost the game 
+function ifGameLost(){
+    
 }

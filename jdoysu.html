@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width initial-scale=1.0 user-scalable=no">
     <title>JDoysu</title>
     <link rel="stylesheet" href="jdoysu.css">
-    <script src="jdoysu.js"></script>
 </head>
 
 <body>
@@ -17,7 +16,20 @@
     <div id="board"></div>
     <br>
     <div id="digits"></div>
+    <br>
+    <button id="reset">Reset</button>
 
+    <!-- winning message -->
+    <div id="winMessage" style="display: none;">
+        <h3>Congratualtion! You Won!</h3>
+    </div>
+
+    <!-- lose message -->
+    <div id="loseMessage" style="display: none;">
+        <h3>You have lost!</h3>
+    </div>
+    
+    <script src="jdoysu.js"></script>
 
 </body>
 </html>
