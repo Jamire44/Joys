@@ -1,3 +1,38 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* Set width to 100% */
+    
+}
+
+.header img {
+    margin-right: 5px; /* Add some space between image and h1 */
+}
+
+.header h1 {
+    font-size: 5em;    
+}
+
+
+.container {
+    display: grid;
+    width: 100vh;
+    height: 100vh; /* Make the container take up the full height of the viewport */
+}
+
+
+.header {
+    grid-column: 1 / span 1; 
+    background-color: #1E1E1E;
+}
+
+h1 {
+    margin: 0;
+    padding: 20px; 
+    color: #37D0EE;
+}
+
 body {
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
@@ -8,7 +43,7 @@ hr {
 }
 
 #errors {
-    color: coral;
+    color: #FD3C4F;
 }
 
 #board {
@@ -58,7 +93,8 @@ hr {
 }
 
 .number-selected {
-    background-color: gray;
+    background-color: black;
+    color: #37D0EE;
 }
 
 .starter-tiles {
@@ -92,5 +128,5 @@ hr {
 
 #resetButton:hover {
     background-color: #1E1E1E;
-    color: white;
+    color: #37D0EE;
 }
