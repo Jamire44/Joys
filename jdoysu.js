@@ -101,10 +101,12 @@ function selectTile(){
         document.getElementById("errors").innerText = errors;
     }   
         
-    gameIsWon();
+    gameIsWonOrLost();
 }
 
-function gameIsWon() {
+
+// Game is Won
+function gameIsWonOrLost() {
     let tiles = document.querySelectorAll('.tile:not(.starter-tiles)');
     let allCorrect = true;
 
@@ -122,19 +124,22 @@ function gameIsWon() {
     if (allCorrect) {
         gameWon = true;
         displayMessageIfWon();
-    } 
+    } else{
+        gameIsLost();
+    }
     
 
  
 }
-
-
 
 // If game is lost, display this message
 function displayMessageIfLost() {
     if(errors >= 3) {
         document.getElementById("loseMessage").style.display = 'block';
     }
+    setTimeout(function() {
+        document.getElementById("loseMessage").style.display = "none";}
+        , 1500);
 }
 
 
@@ -142,12 +147,48 @@ function displayMessageIfLost() {
 // If game is won, display this message
 function displayMessageIfWon(){
     var errorAmount = document.getElementById("errors").innerText;
-    document.getElementById("winMessage").innerHTML += "<h3>It only took " + errorAmount + " tries</h3>";
+    document.getElementById("winMessage").innerHTML += "<h3>It only took " + errorAmount + " misses</h3>";
     document.getElementById("winMessage").style.display = 'block';
+
+    setTimeout(function() {
+        document.getElementById("winMessage").style.display = "none";}
+        , 1500);
 }
 
 
 // Game is lost, reset game and tell them they lost the game 
-function ifGameLost(){
+function gameIsLost(){
+    if(errors >= 3){
+        displayMessageIfLost();
+        resetGame();
+    }
+}
+
+
+
+// Reset the game
+function resetGame(){
+
+    // Setting all the numbers on the bottom row to nothing
+    let digitsContainer = document.getElementById("digits");
+    digitsContainer.innerHTML = '';
+
+    // Setting all of the board html to nothing
+    let boardContainer = document.getElementById("board");
+    boardContainer.innerHTML = '';
+
+    // Setting the errors to 0 when game is over
+    errors = 0;
+    document.getElementById("errors").innerText = errors;
     
+
+    // calling the game
+    setGame();
+}
+
+// Reset Button, Resets the game
+function resetGameButton(){
+    const resetButton = document.getElementById("resetButton");
+    resetButton.addEventListener("click", resetGame());
+
 }
